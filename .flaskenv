@@ -1,0 +1,2 @@
+FLASK_APP=h1bViz
+FLASK_ENV=development

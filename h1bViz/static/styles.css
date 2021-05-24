@@ -1,0 +1,128 @@
+html, body {
+    height: 100%;
+}
+
+html {
+    background-color: #f8f9fa;
+}
+
+#navigation-bar {
+    height: 50px;
+}
+
+#container {
+    height: calc(100% - 50px);
+}
+
+#first-row {
+    height: 100%;
+}
+
+#yearSpan {
+    padding-left: 10px;
+}
+
+#legend-block li {
+    font-size: 0.85rem;
+}
+
+.dropdownLabel {
+    margin-left: 5px;
+}
+
+.dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.littleTopMargin {
+    margin-top: 5px;
+}
+
+.largeTopMargin {
+    margin-top: 7px;
+}
+
+#yearRange {
+    width: 50%;
+    display: inline-block;
+    margin: 0 0 0 10px;
+}
+
+#yearRangeLabel {
+    padding-right: 10px;
+}
+
+.select-hr {
+    margin-top: 1px;
+    margin-bottom: 2px;
+}
+
+.legend{
+    list-style: none;
+    padding: 0 0 0 5px;
+}
+.legend li {
+    margin-right: 10px;
+}
+.legend span {
+    border: 1px solid #ccc;
+    float: left;
+    width: 12px;
+    height: 12px;
+    margin: 2px;
+}
+
+.legend span {
+    opacity: 0.7;
+}
+
+.legend .lev1 {
+    background-color: #800026;
+}
+
+.legend .lev2 {
+    background-color: #BD0026;
+}
+
+.legend .lev3 {
+    background-color: #E31A1C;
+}
+
+.legend .lev4 {
+    background-color: #FC4E2A;
+}
+
+.legend .lev5 {
+    background-color: #FD8D3C;
+}
+
+.legend .lev6 {
+    background-color: #FEB24C;
+}
+
+.legend .lev7 {
+    background-color: #FED976;
+}
+
+.legend .lev8 {
+    background-color: #FFEDA0;
+}
+
+.marker-cluster {
+    background-color: #187bcd;
+    color: white;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}

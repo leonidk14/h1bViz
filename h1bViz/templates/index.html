@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <title>h1bViz</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+                integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+                crossorigin="">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+                integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+                crossorigin=""></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+			  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+			  crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js" integrity="sha512-MQlyPV+ol2lp4KodaU/Xmrn+txc1TP15pOBF/2Sfre7MRsA/pB4Vy58bEqe9u7a7DczMLtU5wT8n7OblJepKbg==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css" integrity="sha512-BBToHPBStgMiw0lD4AtkRIZmdndhB6aQbXpX7omcrXeG2PauGBl2lzq2xUZTxaLxYz5IDHlmneCZ1IJ+P3kYtQ==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" integrity="sha512-RLEjtaFGdC4iQMJDbMzim/dOvAu+8Qp9sw7QE4wIMYcg2goVoivzwgSZq9CsIxp4xKAZPKh5J2f2lOko2Ze6FQ==" crossorigin="anonymous" />
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+        <link rel="icon" href="data:,">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navigation-bar">
+            <a class="navbar-brand" href="#">H1b Viz</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Predict a status</a>
+            </div>
+            </div>
+        </nav>
+        <div class="container-fluid bg-light" id="container">
+            <div class="row" id="first-row">
+                <div class="col-3" id="filters">
+                    <form id="filterForm">
+                        <label class="littleTopMargin">Case status: </label>
+                        <select class="form-control" id="caseStatusFilter" name="caseStatus" required></select>
+
+                        <div class="largeTopMargin">
+                            <span>Year range:</span>
+                            <div id="yearRange"></div>
+                            <input type="hidden" id="yearRangeFrom" name="yearRangeFrom">
+                            <input type="hidden" id="yearRangeTo" name="yearRangeTo">
+                            <span id="yearSpan"></span>
+                        </div>
+
+                        <label class="littleTopMargin">Type of contract:</label>
+                        <div class="checkbox">
+                          <input type="checkbox" value="Y" name="fullTime" checked id="checkFullTime"><label for="checkFullTime"> Full time</label>
+                        </div>
+                        <div class="checkbox">
+                          <input type="checkbox" value="N" name="fullTime" checked id="checkPartTime"><label for="checkPartTime"> Part time</label>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="littleTopMargin">Prevailing wage:</label>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="From $:" name="wageFrom">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="To $:" name="wageTo">
+                            </div>
+                        </div>
+
+                        <label class="littleTopMargin"></label>
+                        <div class="dropdown">
+                            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Select US states:
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="states-dropdown">
+                                <input type="checkbox" name="select-all" id="select-all" checked/><label class="dropdownLabel">Select all</label>
+                                <hr class="select-hr">
+                            </div>
+                        </div>
+
+                        <div class="form-check littleTopMargin">
+                            <input class="form-check-input" type="radio" name="radioShowBy" id="radio1" value="byState" checked>
+                            <label class="form-check-label" for="radio1">
+                                Show by state
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioShowBy" id="radio2" value="separate">
+                            <label class="form-check-label" for="radio2">
+                                Show separate
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary littleTopMargin">Apply filters</button>
+                    </form>
+                </div>
+                <div class="col-8" id="mapid"></div>
+                <div class="col-1">
+                    <div id="legend-block">
+                        <label class="littleTopMargin">Number of petitions:</label>
+                        <ul class="legend">
+                            <li><span class="lev1"></span> 5000+</li>
+                            <li><span class="lev2"></span> 2500-4999</li>
+                            <li><span class="lev3"></span> 1000-2499</li>
+                            <li><span class="lev4"></span> 500-999</li>
+                            <li><span class="lev5"></span> 250-499</li>
+                            <li><span class="lev6"></span> 100-249</li>
+                            <li><span class="lev7"></span> 50-99</li>
+                            <li><span class="lev8"></span> 0-49</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='map.js') }}" type="module"></script>
+    </body>
+</html>
