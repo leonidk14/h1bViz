@@ -8,5 +8,5 @@ group the data by states. Also all rows, which has NA values, were removed. The 
 with a single table.
 
 There was built a simple API based on Flask framework with SQLite database. The interface was created using Bootstrap. 
-To create an interactive map based on data from API I used Leaflet library. The application was deployed on Heroku platform.
+To create an interactive map based on data from API I used Leaflet library.
 
