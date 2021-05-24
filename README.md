@@ -10,5 +10,3 @@ with a single table.
 There was built a simple API based on Flask framework with SQLite database. The interface was created using Bootstrap. 
 To create an interactive map based on data from API I used Leaflet library. The application was deployed on Heroku platform.
 
-The project is not finished yet, there will come few more plots and a possibility to predict a case status for a 
-particular case using a model trained on existing data.
